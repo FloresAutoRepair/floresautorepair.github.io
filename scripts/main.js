@@ -56,33 +56,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Store reviews in memory
     window.reviewsData = reviews;
+
+    // Header scroll behavior for floating nav
+    const header = document.querySelector('.header');
+    const nav = document.querySelector('.main-nav');
+    let scrollTimeout;
+
+    window.addEventListener('scroll', function() {
+        // When scrolled more than 50px, add the "floating" class to header.
+        if (window.pageYOffset > 50) {
+            header.classList.add('floating');
+        } else {
+            header.classList.remove('floating');
+        }
+
+        // Show nav while scrolling
+        nav.classList.remove('hidden');
+
+        // Clear any previous timeout.
+        clearTimeout(scrollTimeout);
+        // Set a timeout to hide (fade out) the nav after 2 seconds of no scrolling.
+        scrollTimeout = setTimeout(() => {
+            nav.classList.add('hidden');
+        }, 2000);
+    });
 });
 
-function setLanguage(lang) {
-    document.getElementById('languageModal').style.display = 'none';
-    document.documentElement.lang = lang;
-
-    // Update all text elements
-    document.querySelectorAll('[data-en], [data-es]').forEach(element => {
-        const text = element.getAttribute(`data-${lang}`);
-        if (text) element.textContent = text;
-    });
-
-    // Populate reviews
-    const reviewsGrid = document.querySelector('.reviews-grid');
-    reviewsGrid.innerHTML = '';
-
-    window.reviewsData.forEach(review => {
-        const reviewCard = document.createElement('div');
-        reviewCard.className = 'review-card fade-in';
-        reviewCard.innerHTML = `
-            <div class="review-header">
-                <h4>${review.name}</h4>
-                <div class="stars">${review.stars}</div>
-            </div>
-            <div class="review-time">${review[`time_${lang}`]}</div>
-            <p>${review[`text_${lang}`]}</p>
-        `;
-        reviewsGrid.appendChild(reviewCard);
-    });
-}
+function setLanguage(lan

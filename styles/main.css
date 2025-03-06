@@ -144,17 +144,16 @@ body {
   color: var(--primary-red);
 }
 
+/* Spacer to push content down below the fixed header */
+.header-spacer {
+  height: 80px;
+}
+
 /* Hero Section */
 .hero {
-  margin-top: 80px; /* account for fixed header */
   overflow: hidden;
 }
 
-/* Updated hero container:
-   – It now sizes naturally to the image’s dimensions.
-   – The image is set to width: 100% and height: auto.
-   – The overlay and text are absolutely positioned over the image.
-*/
 .hero-image-container {
   position: relative;
   width: 100%;

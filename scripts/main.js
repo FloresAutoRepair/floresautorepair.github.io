@@ -47,8 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             name: "Franklin Lamar",
             stars: "★★★★★",
-            time_en: "1 year ago",
-            time_es: "hace 1 año",
+            time_en: "a year ago",
+            time_es: "hace un año",
             text_en: "I went to two mechanics before going to Fernando. The mechanics solved one problem but then caused another. When I went to Fernando, he drove my car once and told me everything that was wrong and fixed everything in the car and charged me a reasonable price. The best mechanic in all of Rosemead; does everything quickly. It has a 10",
             text_es: "Fui a dos mecánicos antes de ir con Fernando. Los mecánicos solucionaron un problema pero luego causo otro. Cuando fui con Fernando, él manejo mi carro una vez y me dijo todo lo que tenía mal y arregló todo lo que tenía el auto y me cobró un precio razonable. El mejor mecánico de todo Rosemead; hace todo rápidamente. Tiene un 10"
         }

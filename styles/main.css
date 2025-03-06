@@ -20,6 +20,11 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Ensure the language modal is hidden by default */
+#languageModal {
+  display: none;
+}
+
 /* Responsive Image Fix for other images */
 .image-container {
   width: 100%;

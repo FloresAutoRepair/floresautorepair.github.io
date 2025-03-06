@@ -1,8 +1,21 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Show language modal
-    document.getElementById('languageModal').style.display = 'flex';
+    // Check if a language has been set; if not, show the language modal.
+    if (!localStorage.getItem('language')) {
+        document.getElementById('languageModal').style.display = 'flex';
+    } else {
+        document.getElementById('languageModal').style.display = 'none';
+        // Optionally, update the language of elements based on stored value.
+        const lang = localStorage.getItem('language');
+        document.documentElement.lang = lang;
+        document.querySelectorAll('[data-en], [data-es]').forEach(element => {
+            const text = element.getAttribute(`data-${lang}`);
+            if (text) element.textContent = text;
+        });
+        // Also populate reviews if needed.
+        populateReviews(lang);
+    }
 
-    // Initialize reviews
+    // Initialize reviews data
     const reviews = [
         {
             name: "Pepe Ramos",
@@ -54,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     ];
 
-    // Store reviews in memory
+    // Store reviews in memory for later use
     window.reviewsData = reviews;
 
     // Header scroll behavior for floating nav
@@ -63,7 +76,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let scrollTimeout;
 
     window.addEventListener('scroll', function() {
-        // When scrolled more than 50px, add the "floating" class to header.
         if (window.pageYOffset > 50) {
             header.classList.add('floating');
         } else {
@@ -72,14 +84,43 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Show nav while scrolling
         nav.classList.remove('hidden');
-
-        // Clear any previous timeout.
         clearTimeout(scrollTimeout);
-        // Set a timeout to hide (fade out) the nav after 2 seconds of no scrolling.
         scrollTimeout = setTimeout(() => {
             nav.classList.add('hidden');
         }, 2000);
     });
 });
 
-function setLanguage(lan
+function setLanguage(lang) {
+    // Hide the modal and save language choice
+    document.getElementById('languageModal').style.display = 'none';
+    localStorage.setItem('language', lang);
+    document.documentElement.lang = lang;
+
+    // Update all text elements based on chosen language
+    document.querySelectorAll('[data-en], [data-es]').forEach(element => {
+        const text = element.getAttribute(`data-${lang}`);
+        if (text) element.textContent = text;
+    });
+
+    // Populate reviews in chosen language
+    populateReviews(lang);
+}
+
+function populateReviews(lang) {
+    const reviewsGrid = document.querySelector('.reviews-grid');
+    reviewsGrid.innerHTML = '';
+    window.reviewsData.forEach(review => {
+        const reviewCard = document.createElement('div');
+        reviewCard.className = 'review-card fade-in';
+        reviewCard.innerHTML = `
+            <div class="review-header">
+                <h4>${review.name}</h4>
+                <div class="stars">${review.stars}</div>
+            </div>
+            <div class="review-time">${review[`time_${lang}`]}</div>
+            <p>${review[`text_${lang}`]}</p>
+        `;
+        reviewsGrid.appendChild(reviewCard);
+    });
+}

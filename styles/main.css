@@ -20,6 +20,23 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
+/* Responsive Image Fix */
+.image-container {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
 /* Language Modal */
 .modal {
     position: fixed;
@@ -313,7 +330,6 @@ body {
     width: 100%;
     height: 100%;
     border: none;
-    filter: grayscale(100%) contrast(110%) brightness(90%);
 }
 
 .contact-info {

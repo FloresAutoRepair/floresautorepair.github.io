@@ -144,9 +144,9 @@ body {
   color: var(--primary-red);
 }
 
-/* Spacer to push content down below the fixed header */
-.header-spacer {
-  height: 80px;
+/* Push main content down so fixed header doesn't overlap */
+main {
+  margin-top: 80px;
 }
 
 /* Hero Section */
